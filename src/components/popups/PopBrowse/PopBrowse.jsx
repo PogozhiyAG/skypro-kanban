@@ -1,4 +1,4 @@
-export const PopBrows = () => {
+export const PopBrowse = () => {
     return (
         <div className="pop-browse" id="popBrowse">
 			<div className="pop-browse__container">
