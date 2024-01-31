@@ -17,7 +17,7 @@ export const CardStatusList = ({tasks, statusCode}) => {
                 {
                     tasks
                         .filter(t => t.status === statusCode)
-                        .map((t, i) => <CardItem key={i} cardItem={t}/>)
+                        .map(t => <CardItem key={t.id} cardItem={t}/>)
                 }
             </div>
         </div>		

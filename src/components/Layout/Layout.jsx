@@ -2,10 +2,10 @@
 import { Header } from "../Header/Header";
 import { PopExit } from "../popups/PopExit/PopExit";
 
-export const Layout = ({children}) => {
+export const Layout = ({children, addNewTask}) => {
     return (
         <div className="wrapper">
-            <Header/>
+            <Header addNewTask={addNewTask}/>
 
             <main className="main">
                 <div className="container">                    
