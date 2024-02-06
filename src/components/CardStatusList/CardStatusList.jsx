@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import './CardStatusList.css';
-import { CardItem } from "../CardItem/CardItem";
+import { CardItem } from "../CardItem/CardItem.jsx";
 import { TASK_STATUSES } from "../../data";
 
 
