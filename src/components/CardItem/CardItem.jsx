@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import './CardItem.css';
 import calendarSvg from '../../assets/calendar.svg';
 import { TASK_CATEGORY } from '../../data.js';
 import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle, DivCardContent, DivCardGroup, DivCardTheme, DivCardsCard, DivCardsItem, PCardCategory } from './CardItem.styled.js';
