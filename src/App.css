@@ -203,7 +203,7 @@ body {
   justify-content: space-between;
 }
 
-.pop-user-set__name {
+/* .pop-user-set__name {
   color: #000;
   font-size: 14px;
   font-weight: 500;
@@ -217,7 +217,7 @@ body {
   line-height: 21px;
   letter-spacing: -0.14px;
   margin-bottom: 10px;
-}
+} */
 .pop-user-set__theme {
   display: flex;
   align-items: center;
@@ -230,7 +230,7 @@ body {
   line-height: 21px;
   letter-spacing: -0.14px;
 }
-.pop-user-set__theme input[type=checkbox] {
+/* .pop-user-set__theme input[type=checkbox] {
   position: relative;
   width: 24px;
   height: 13px;
@@ -254,7 +254,7 @@ body {
 }
 .pop-user-set__theme input:checked[type=checkbox]::before {
   left: 12px;
-}
+} */
 .pop-user-set button {
   width: 72px;
   height: 30px;
@@ -705,7 +705,7 @@ body {
 }
 
 
-.main {
+/* .main {
   width: 100%;
   background-color: #EAEEF6;
 }
@@ -728,7 +728,7 @@ body {
   .main__content {
     display: block;
   }
-}
+} */
 @media screen and (max-width: 660px) {
   .pop-new-card {
     top: 70px;

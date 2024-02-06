@@ -4,7 +4,7 @@ import { CardBoard } from "../../CardBoard/CardBoard";
 import { Layout } from "../../Layout/Layout";
 
 
-export const Home = ({tasks, addNewTask}) => {
+export const Home = ({tasks, addNewTask, changeTheme}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export const Home = ({tasks, addNewTask}) => {
     }, [])
 
     return (
-        <Layout addNewTask={addNewTask}>
+        <Layout addNewTask={addNewTask} changeTheme={changeTheme}>
             {isLoading 
                 ? 'Загрузка...'
                 : <CardBoard tasks={tasks}/>

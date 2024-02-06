@@ -3,45 +3,57 @@ import { useState } from 'react';
 import { PopExit } from '../popups/PopExit/PopExit';
 import { PopNewCard } from '../popups/PopNewCard/PopNewCard';
 import './Header.css';
+import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetMailP, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
+import { ContainerDiv } from '../styled/shared';
+import { CircleCheckBox } from '../styled/CircleCheckBox';
+import { useTheme } from 'styled-components';
 
-export const Header = ({addNewTask}) => {
+export const Header = ({addNewTask, changeTheme}) => {
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
+    const theme = useTheme();
 
     const handleAddNewTaskClick = () => addNewTask && addNewTask();
 
     const toggleIsUserPopupShown = () => setIsUserPopupShown(shown => !shown);
 
+    const handleToggleTheme = e => {
+        const newTheme = e.target.checked ? 'dark' : 'light';
+        changeTheme(newTheme);
+    }
+
     return (
         <>  
-            <header className="header">
-                <div className="container">
-                    <div className="header__block">
-                        <div className="header__logo _show _light">
-                            <a href="" target="_self"><img src="../images/logo.png" alt="logo"/></a>
-                        </div>
-                        <div className="header__logo _dark">
-                            <a href="" target="_self"><img src="../images/logo_dark.png" alt="logo"/></a>
-                        </div>
-                        <nav className="header__nav">
-                            <button onClick={handleAddNewTaskClick} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
-                            <a onClick={toggleIsUserPopupShown} className="header__user _hover02">Ivan Ivanov</a>
+            <HeaderHeader>
+                <ContainerDiv>
+                    <HeaderBlockDiv>
+                        <HeaderLogoDiv>
+                            <a href="" target="_self">
+                                <HeaderLogoImage src={theme.logo} alt="logo"/>
+                            </a>
+                        </HeaderLogoDiv>
+                       
+                        <HeaderNav>
+                            <HeaderNewButton onClick={handleAddNewTaskClick} id="btnMainNew">Создать новую задачу</HeaderNewButton>                            
+                            <HeaderUserA onClick={toggleIsUserPopupShown}>Ivan Ivanov</HeaderUserA>
 
                             {isUserPopupShown && (
-                                <div className="header__pop-user-set pop-user-set" id="user-set-target">            
-                                    <p className="pop-user-set__name">Ivan Ivanov</p>
-                                    <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                                    <div className="pop-user-set__theme">
-                                        <p>Темная тема</p>
-                                        <input type="checkbox" className="checkbox" name="checkbox"/>
-                                    </div>
-                                    <button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
-                                </div>
+                                <HeaderPopUserSetDiv>            
+                                    <PopUserSetNameP>Ivan Ivanov</PopUserSetNameP>
+                                    <PopUserSetMailP>ivan.ivanov@gmail.com</PopUserSetMailP>
+                                    <PopUserSetThemeDiv>
+                                        <PopUserSetThemeP>Темная тема</PopUserSetThemeP>
+                                        <CircleCheckBox type="checkbox" onChange={handleToggleTheme}/>
+                                    </PopUserSetThemeDiv>
+                                    <HeaderPopUserSetButton>
+                                        <HeaderPopUserSetA href="#popExit">Выйти</HeaderPopUserSetA>
+                                    </HeaderPopUserSetButton>
+                                </HeaderPopUserSetDiv>
                             )}
                             
-                        </nav>					
-                    </div>
-                </div>			
-            </header>
+                        </HeaderNav>					
+                    </HeaderBlockDiv>
+                </ContainerDiv>			
+            </HeaderHeader>
 
             <PopNewCard/>
             <PopExit/>

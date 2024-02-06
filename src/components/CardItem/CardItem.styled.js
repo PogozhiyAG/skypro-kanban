@@ -19,7 +19,7 @@ export const DivCardsItem = styled.div`
 export const DivCardsCard = styled.div`
     width: 220px;
     height: 130px;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.bg.primary};
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -103,7 +103,7 @@ export const CardTitle = styled.h3`
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
-    color: #000000;
+    color: ${props => props.theme.fg.primary};
     margin-bottom: 10px;
 `;
 

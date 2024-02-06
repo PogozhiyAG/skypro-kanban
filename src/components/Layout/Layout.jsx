@@ -1,21 +1,23 @@
 /* eslint-disable react/prop-types */
 import { Header } from "../Header/Header";
 import { PopExit } from "../popups/PopExit/PopExit";
+import { ContainerDiv } from "../styled/shared";
+import { MainBlockDiv, MainContentDiv, MainMain } from "./Layout.styled";
 
-export const Layout = ({children, addNewTask}) => {
+export const Layout = ({children, addNewTask, changeTheme}) => {
     return (
         <div className="wrapper">
-            <Header addNewTask={addNewTask}/>
+            <Header addNewTask={addNewTask} changeTheme={changeTheme}/>
 
-            <main className="main">
-                <div className="container">                    
-                    <div className="main__block">
-                        <div className="main__content">
+            <MainMain>
+                <ContainerDiv>                    
+                    <MainBlockDiv>
+                        <MainContentDiv>
                             {children}
-                        </div>				
-                    </div>
-                </div>
-            </main>
+                        </MainContentDiv>				
+                    </MainBlockDiv>
+                </ContainerDiv>
+            </MainMain>
 
             <PopExit/>
       </div>
