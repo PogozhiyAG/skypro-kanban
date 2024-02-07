@@ -3,32 +3,7 @@ import { useState } from 'react'
 import { Home } from './components/pages/Home/Home'
 import { tasksList } from './data'
 import { ThemeProvider } from 'styled-components';
-
-
-const themes = {
-  light: {
-    fg: {
-      primary: '#000000',
-      secondary: '#565EEF'
-    },
-    bg: {
-      primary: '#ffffff',
-      secondary: '#EAEEF6',
-    },
-    logo: '../images/logo.png'
-  },
-  dark: {
-    fg: {
-      primary: '#FFFFFF',
-      secondary: '#FFFFFF'
-    },
-    bg: {
-      primary: '#20202C',
-      secondary: '#000000',
-    },
-    logo: '../images/logo_dark.png'
-  }
-};
+import { themes } from './Themes';
 
 
 function App() {
