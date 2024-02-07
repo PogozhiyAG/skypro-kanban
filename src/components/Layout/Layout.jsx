@@ -2,11 +2,11 @@
 import { Header } from "../Header/Header";
 import { PopExit } from "../popups/PopExit/PopExit";
 import { ContainerDiv } from "../styled/shared";
-import { MainBlockDiv, MainContentDiv, MainMain } from "./Layout.styled";
+import { MainBlockDiv, MainContentDiv, MainMain, WrapperDiv } from "./Layout.styled";
 
 export const Layout = ({children, addNewTask, changeTheme}) => {
     return (
-        <div className="wrapper">
+        <WrapperDiv>
             <Header addNewTask={addNewTask} changeTheme={changeTheme}/>
 
             <MainMain>
@@ -20,6 +20,6 @@ export const Layout = ({children, addNewTask, changeTheme}) => {
             </MainMain>
 
             <PopExit/>
-      </div>
+      </WrapperDiv>
     );
 }

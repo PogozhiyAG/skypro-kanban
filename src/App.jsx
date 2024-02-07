@@ -4,6 +4,7 @@ import { Home } from './components/pages/Home/Home'
 import { tasksList } from './data'
 import { ThemeProvider } from 'styled-components';
 import { themes } from './Themes';
+import { GlobalStyle } from './components/styled/GlobalStyle';
 
 
 function App() {
@@ -23,11 +24,11 @@ function App() {
   }
 
   const changeTheme = newTheme => setTheme(themes[newTheme]);
-
   
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle/>
       <Home tasks={tasks} addNewTask={addNewTask} changeTheme={changeTheme}/>
     </ThemeProvider>
   )
