@@ -2,7 +2,6 @@
 import { TASK_STATUSES } from '../../data';
 import { CardStatusList } from '../CardStatusList/CardStatusList';
 import { PopBrowse } from '../popups/PopBrowse/PopBrowse';
-import './CardBoard.css';
 
 export const CardBoard = ({tasks}) => {
     return (

@@ -1,48 +1,38 @@
 /* eslint-disable react/prop-types */
-import './CardItem.css';
+import calendarSvg from '../../assets/calendar.svg';
 import { TASK_CATEGORY } from '../../data.js';
+import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle, DivCardContent, DivCardGroup, DivCardTheme, DivCardsCard, DivCardsItem, PCardCategory } from './CardItem.styled.js';
 
 export const CardItem = ({cardItem}) => {
     const category = TASK_CATEGORY[cardItem.category];
     const categoryName = category?.name ?? cardItem.category;
     const categoryClass = category.class ?? '';
-    const categoryThemeClass = 'card__theme ' + categoryClass;
 
     return (
-        <div className="cards__item">
-            <div className="cards__card card">
-                <div className="card__group">
-                    <div className={categoryThemeClass}>
-                        <p className={categoryClass}>{categoryName}</p>
-                    </div>
+        <DivCardsItem>
+            <DivCardsCard>
+                <DivCardGroup>
+                    <DivCardTheme $categoryclass={categoryClass}>
+                        <PCardCategory $categoryclass={categoryClass}>{categoryName}</PCardCategory>
+                    </DivCardTheme>
                     <a href="#popBrowse" target="_self">
-                        <div className="card__btn">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        <CardButtons>
+                            <CardButtonDot/>
+                            <CardButtonDot/>
+                            <CardButtonDot/>
+                        </CardButtons>
                     </a>
-                </div>
-                <div className="card__content">
+                </DivCardGroup>
+                <DivCardContent>
                     <a href="" target="_blank">
-                        <h3 className="card__title">{cardItem.name}</h3>
+                        <CardTitle>{cardItem.name}</CardTitle>
                     </a>
-                    <div className="card__date">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-                            <g clipPath="url(#clip0_1_415)">
-                                <path d="M10.5625 2.03125H2.4375C1.7644 2.03125 1.21875 2.5769 1.21875 3.25V10.5625C1.21875 11.2356 1.7644 11.7812 2.4375 11.7812H10.5625C11.2356 11.7812 11.7812 11.2356 11.7812 10.5625V3.25C11.7812 2.5769 11.2356 2.03125 10.5625 2.03125Z" stroke="#94A6BE" strokeWidth="0.8" strokeLinejoin="round" />
-                                <path d="M11.7812 4.0625H1.21875M3.25 1.21875V2.03125V1.21875ZM9.75 1.21875V2.03125V1.21875Z" stroke="#94A6BE" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_1_415">
-                                    <rect width="13" height="13" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                        <p>{cardItem.date}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <CardDate>
+                    <CardDateImg src={calendarSvg}></CardDateImg>
+                        <CardDateP>{cardItem.date}</CardDateP>
+                    </CardDate>
+                </DivCardContent>
+            </DivCardsCard>
+        </DivCardsItem>
     );
 };

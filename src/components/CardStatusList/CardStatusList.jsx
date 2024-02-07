@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import './CardStatusList.css';
-import { CardItem } from "../CardItem/CardItem";
+import { CardItem } from "../CardItem/CardItem.jsx";
 import { TASK_STATUSES } from "../../data";
+import { CardsDiv, ColumnTitleDiv, ColumnTitleP, MainColumnDiv } from './CardStatusList.styled.js';
 
 
 export const CardStatusList = ({tasks, statusCode}) => {
@@ -9,17 +9,17 @@ export const CardStatusList = ({tasks, statusCode}) => {
     const statusName = status?.name ?? statusCode;
 
     return (
-        <div className="main__column ">
-            <div className="column__title">
-                <p>{statusName}</p>
-            </div>
-            <div className="cards">
+        <MainColumnDiv>
+            <ColumnTitleDiv>
+                <ColumnTitleP>{statusName}</ColumnTitleP>
+            </ColumnTitleDiv>
+            <CardsDiv>
                 {
                     tasks
                         .filter(t => t.status === statusCode)
                         .map(t => <CardItem key={t.id} cardItem={t}/>)
                 }
-            </div>
-        </div>		
+            </CardsDiv>
+        </MainColumnDiv>
     );
 };
