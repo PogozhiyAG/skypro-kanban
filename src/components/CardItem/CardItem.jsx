@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
 import calendarSvg from '../../assets/calendar.svg';
 import { TASK_CATEGORY } from '../../data.js';
 import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle, DivCardContent, DivCardGroup, DivCardTheme, DivCardsCard, DivCardsItem, PCardCategory } from './CardItem.styled.js';
@@ -7,6 +8,8 @@ export const CardItem = ({cardItem}) => {
     const category = TASK_CATEGORY[cardItem.category];
     const categoryName = category?.name ?? cardItem.category;
     const categoryClass = category.class ?? '';
+
+    const cardUrl = `/card/${cardItem.id}`;
 
     return (
         <DivCardsItem>
@@ -24,9 +27,9 @@ export const CardItem = ({cardItem}) => {
                     </a>
                 </DivCardGroup>
                 <DivCardContent>
-                    <a href="" target="_blank">
+                    <Link to={cardUrl}>
                         <CardTitle>{cardItem.name}</CardTitle>
-                    </a>
+                    </Link>
                     <CardDate>
                     <CardDateImg src={calendarSvg}></CardDateImg>
                         <CardDateP>{cardItem.date}</CardDateP>

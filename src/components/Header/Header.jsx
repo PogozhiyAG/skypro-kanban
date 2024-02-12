@@ -7,9 +7,12 @@ import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav
 import { ContainerDiv } from '../styled/shared';
 import { CircleCheckBox } from '../styled/CircleCheckBox';
 import { useTheme } from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../AppRoutes';
 
 export const Header = ({addNewTask, changeTheme}) => {
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
+    const navigate = useNavigate();
     const theme = useTheme();
 
     const handleAddNewTaskClick = () => addNewTask && addNewTask();
@@ -21,15 +24,20 @@ export const Header = ({addNewTask, changeTheme}) => {
         changeTheme(newTheme);
     }
 
+    const handleLogoutClick = () => {
+        setIsUserPopupShown(false);
+        navigate(AppRoutes.Logout);
+    }
+
     return (
         <>  
             <HeaderHeader>
                 <ContainerDiv>
                     <HeaderBlockDiv>
                         <HeaderLogoDiv>
-                            <a href="" target="_self">
+                            <Link to="/">
                                 <HeaderLogoImage src={theme.logo} alt="logo"/>
-                            </a>
+                            </Link>                            
                         </HeaderLogoDiv>
                        
                         <HeaderNav>
@@ -45,7 +53,7 @@ export const Header = ({addNewTask, changeTheme}) => {
                                         <CircleCheckBox type="checkbox" onChange={handleToggleTheme}/>
                                     </PopUserSetThemeDiv>
                                     <HeaderPopUserSetButton>
-                                        <HeaderPopUserSetA href="#popExit">Выйти</HeaderPopUserSetA>
+                                        <HeaderPopUserSetA onClick={handleLogoutClick}>Выйти</HeaderPopUserSetA>
                                     </HeaderPopUserSetButton>
                                 </HeaderPopUserSetDiv>
                             )}

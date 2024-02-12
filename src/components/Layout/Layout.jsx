@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
+import { Outlet } from "react-router-dom";
 import { Header } from "../Header/Header";
 import { PopExit } from "../popups/PopExit/PopExit";
 import { ContainerDiv } from "../styled/shared";
 import { MainBlockDiv, MainContentDiv, MainMain, WrapperDiv } from "./Layout.styled";
 
-export const Layout = ({children, addNewTask, changeTheme}) => {
+export const Layout = ({addNewTask, changeTheme}) => {
     return (
         <WrapperDiv>
             <Header addNewTask={addNewTask} changeTheme={changeTheme}/>
@@ -13,7 +14,7 @@ export const Layout = ({children, addNewTask, changeTheme}) => {
                 <ContainerDiv>                    
                     <MainBlockDiv>
                         <MainContentDiv>
-                            {children}
+                            <Outlet/>
                         </MainContentDiv>				
                     </MainBlockDiv>
                 </ContainerDiv>
