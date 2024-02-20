@@ -1,21 +1,42 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { PopExit } from '../popups/PopExit/PopExit';
 import { PopNewCard } from '../popups/PopNewCard/PopNewCard';
 import './Header.css';
-import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetMailP, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
+import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
 import { ContainerDiv } from '../styled/shared';
 import { CircleCheckBox } from '../styled/CircleCheckBox';
 import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../AppRoutes';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
+import { TASK_CATEGORY, TASK_STATUSES } from '../../data';
 
-export const Header = ({addNewTask, changeTheme}) => {
+export const Header = ({ changeTheme }) => {
+    const {auth} = useContext(AuthContext);
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
+    const {addTask} = useContext(DataContext);
     const navigate = useNavigate();
     const theme = useTheme();
 
-    const handleAddNewTaskClick = () => addNewTask && addNewTask();
+    const handleAddNewTaskClick = () => {
+        //TODO create from dialog
+        const getRandomKey = o => {
+            const index = Math.floor((Math.random() * 1000) % Object.keys(o).length);
+            return Object.keys(o)[index];
+        }
+
+        const newTask = {
+            title: "New task",
+            topic: getRandomKey(TASK_CATEGORY),
+            status: getRandomKey(TASK_STATUSES),
+            description: "Migrate to React",
+            date: "2024-01-09T09:58:45.605Z"
+        };
+
+        addTask(newTask);
+    }
 
     const toggleIsUserPopupShown = () => setIsUserPopupShown(shown => !shown);
 
@@ -28,6 +49,8 @@ export const Header = ({addNewTask, changeTheme}) => {
         setIsUserPopupShown(false);
         navigate(AppRoutes.Logout);
     }
+
+    const getUserDisplayName = () => auth?.user?.name ?? "Аноним";
 
     return (
         <>  
@@ -42,19 +65,20 @@ export const Header = ({addNewTask, changeTheme}) => {
                        
                         <HeaderNav>
                             <HeaderNewButton onClick={handleAddNewTaskClick} id="btnMainNew">Создать новую задачу</HeaderNewButton>                            
-                            <HeaderUserA onClick={toggleIsUserPopupShown}>Ivan Ivanov</HeaderUserA>
+                            <HeaderUserA onClick={toggleIsUserPopupShown}>{getUserDisplayName()}</HeaderUserA>
 
                             {isUserPopupShown && (
                                 <HeaderPopUserSetDiv>            
-                                    <PopUserSetNameP>Ivan Ivanov</PopUserSetNameP>
-                                    <PopUserSetMailP>ivan.ivanov@gmail.com</PopUserSetMailP>
+                                    <PopUserSetNameP>{getUserDisplayName()}</PopUserSetNameP>                                    
                                     <PopUserSetThemeDiv>
                                         <PopUserSetThemeP>Темная тема</PopUserSetThemeP>
                                         <CircleCheckBox type="checkbox" onChange={handleToggleTheme}/>
                                     </PopUserSetThemeDiv>
-                                    <HeaderPopUserSetButton>
-                                        <HeaderPopUserSetA onClick={handleLogoutClick}>Выйти</HeaderPopUserSetA>
-                                    </HeaderPopUserSetButton>
+                                    {auth?.user && (
+                                        <HeaderPopUserSetButton>
+                                            <HeaderPopUserSetA onClick={handleLogoutClick}>Выйти</HeaderPopUserSetA>
+                                        </HeaderPopUserSetButton>
+                                    )}                                    
                                 </HeaderPopUserSetDiv>
                             )}
                             

@@ -21,6 +21,7 @@ export const MainBlockDiv = styled.div`
 export const MainContentDiv = styled.div`
     width: 100%;
     display: flex;
+    justify-content: center;
 
     @media screen and (max-width: 1200px) { 
         display: block;

@@ -8,6 +8,7 @@ export const themes = {
         primary: '#ffffff',
         secondary: '#EAEEF6',
       },
+      border: '#D4DBE5',
       logo: '../images/logo.png'
     },
     dark: {
@@ -19,6 +20,7 @@ export const themes = {
         primary: '#20202C',
         secondary: '#000000',
       },
+      border: '#4E5566',
       logo: '../images/logo_dark.png'
     }
   };
