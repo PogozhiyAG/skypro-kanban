@@ -1,19 +1,34 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardBoard } from "../../CardBoard/CardBoard";
+import { DataContext } from "../../../context/DataContext";
 
 
-export const Home = ({tasks}) => {
+export const Home = () => {
+    const [errorMessage, setErrorMessage] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const {loadTasks, tasks} = useContext(DataContext);
 
     useEffect(() => {
-        const timeout = setTimeout(() => setIsLoading(false), 1000);
-        return () => clearTimeout(timeout);
-    }, [])
+        const work = async () => {
+            try{
+                await loadTasks();
+            } catch(error){
+                setErrorMessage(error)
+            }
+            
+            setIsLoading(false);
+        }
+
+        work();        
+    }, []);
 
     return (
-        isLoading 
-            ? 'Загрузка...'
-            : <CardBoard tasks={tasks}/>
+        errorMessage 
+            ? `Ошибка: ${errorMessage}`
+            : isLoading 
+                ? 'Загрузка...'
+                : <CardBoard tasks={tasks}/>
+            
     );
 }

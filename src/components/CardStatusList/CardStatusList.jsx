@@ -15,9 +15,9 @@ export const CardStatusList = ({tasks, statusCode}) => {
             </ColumnTitleDiv>
             <CardsDiv>
                 {
-                    tasks
-                        .filter(t => t.status === statusCode)
-                        .map(t => <CardItem key={t.id} cardItem={t}/>)
+                     tasks
+                         .filter(t => t.status === statusCode)
+                         .map(t => <CardItem key={t._id} cardItem={t}/>)
                 }
             </CardsDiv>
         </MainColumnDiv>
