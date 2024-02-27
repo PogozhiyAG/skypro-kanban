@@ -1,11 +1,49 @@
-export const PopNewCard = () => {
+/* eslint-disable react/prop-types */
+import './PopNewCard.css'
+import { useContext, useState } from "react";
+import { DataContext } from '../../../context/DataContext';
+import { TASK_CATEGORY, TASK_STATUSES } from '../../../data';
+import { PopNewCardDiv } from "./PopNewCard.styled";
+import { CategoryLabel } from "../../CategoryLabel/CategoryLabel";
+
+export const PopNewCard = ({setIsShown}) => {
+	const [category, setCategory] = useState(TASK_CATEGORY.WEB_DESIGN);
+
+	const {addTask} = useContext(DataContext);
+	const closeModal = () => setIsShown(false);
+
+	const handleCloseClick = e => {
+		e.preventDefault();
+		closeModal();
+	}
+
+	const handleCreateNewClick = async () => {
+		//TODO create from dialog
+        const getRandomKey = o => {
+            const index = Math.floor((Math.random() * 1000) % Object.keys(o).length);
+            return Object.keys(o)[index];
+        }
+
+        const newTask = {
+            title: "New task",
+            topic: getRandomKey(TASK_CATEGORY),
+            status: getRandomKey(TASK_STATUSES),
+            description: "Migrate to React",
+            date: "2024-01-09T09:58:45.605Z"
+        };
+
+        await addTask(newTask);
+
+		closeModal();
+	}
+
     return (
-        <div className="pop-new-card" id="popNewCard">
+		<PopNewCardDiv>
 			<div className="pop-new-card__container">
 				<div className="pop-new-card__block">
 					<div className="pop-new-card__content">
 						<h3 className="pop-new-card__ttl">Создание задачи</h3>
-						<a href="#" className="pop-new-card__close">&#10006;</a>
+						<a href="#" className="pop-new-card__close" onClick={handleCloseClick}>&#10006;</a>
 						<div className="pop-new-card__wrap">
 							<form className="pop-new-card__form form-new" id="formNewCard" action="#">
 								<div className="form-new__block">
@@ -94,21 +132,25 @@ export const PopNewCard = () => {
 						<div className="pop-new-card__categories categories">
 							<p className="categories__p subttl">Категория</p>
 							<div className="categories__themes">
-								<div className="categories__theme _orange _active-category">
-									<p className="_orange">Web Design</p>
-								</div>
-								<div className="categories__theme _green">
-									<p className="_green">Research</p>
-								</div>
-								<div className="categories__theme _purple">
-									<p className="_purple">Copywriting</p>
-								</div>
+								{									
+									Object.keys(TASK_CATEGORY).map(code => {										
+										return(
+											<CategoryLabel 
+												key={code} 
+												code={code} 
+												$size="L" 												
+												onClick={() => setCategory(TASK_CATEGORY[code])}
+												className={`category-item ${category === TASK_CATEGORY[code] ? 'category-item_active' : ''}`}
+											/>
+										)
+									})
+								}
 							</div>
 						</div>
-						<button className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
+						<button className="form-new__create _hover01" id="btnCreate" onClick={handleCreateNewClick}>Создать задачу</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</PopNewCardDiv>
     );
 }

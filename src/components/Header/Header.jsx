@@ -10,32 +10,35 @@ import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../AppRoutes';
 import { AuthContext } from '../../context/AuthContext';
-import { DataContext } from '../../context/DataContext';
-import { TASK_CATEGORY, TASK_STATUSES } from '../../data';
+// import { DataContext } from '../../context/DataContext';
+// import { TASK_CATEGORY, TASK_STATUSES } from '../../data';
 
 export const Header = ({ changeTheme }) => {
     const {auth} = useContext(AuthContext);
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
-    const {addTask} = useContext(DataContext);
+    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);
+    // const {addTask} = useContext(DataContext);
     const navigate = useNavigate();
     const theme = useTheme();
 
     const handleAddNewTaskClick = () => {
-        //TODO create from dialog
-        const getRandomKey = o => {
-            const index = Math.floor((Math.random() * 1000) % Object.keys(o).length);
-            return Object.keys(o)[index];
-        }
+        // //TODO create from dialog
+        // const getRandomKey = o => {
+        //     const index = Math.floor((Math.random() * 1000) % Object.keys(o).length);
+        //     return Object.keys(o)[index];
+        // }
 
-        const newTask = {
-            title: "New task",
-            topic: getRandomKey(TASK_CATEGORY),
-            status: getRandomKey(TASK_STATUSES),
-            description: "Migrate to React",
-            date: "2024-01-09T09:58:45.605Z"
-        };
+        // const newTask = {
+        //     title: "New task",
+        //     topic: getRandomKey(TASK_CATEGORY),
+        //     status: getRandomKey(TASK_STATUSES),
+        //     description: "Migrate to React",
+        //     date: "2024-01-09T09:58:45.605Z"
+        // };
 
-        addTask(newTask);
+        // addTask(newTask);
+
+        setIsNewCardPopupShown(!isNewCardPopupShown);
     }
 
     const toggleIsUserPopupShown = () => setIsUserPopupShown(shown => !shown);
@@ -87,7 +90,7 @@ export const Header = ({ changeTheme }) => {
                 </ContainerDiv>			
             </HeaderHeader>
 
-            <PopNewCard/>
+            {isNewCardPopupShown && <PopNewCard setIsShown={setIsNewCardPopupShown}/>}
             <PopExit/>
         </>
     );
