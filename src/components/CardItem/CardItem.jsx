@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import calendarSvg from '../../assets/calendar.svg';
 import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle, DivCardContent, DivCardGroup, DivCardsCard, DivCardsItem } from './CardItem.styled.js';
 import { CategoryLabel } from '../CategoryLabel/CategoryLabel.jsx';
+import { format } from "date-fns";
+import ru from "date-fns/locale/ru";
 
 export const CardItem = ({cardItem}) => {
     const cardUrl = `/card/${cardItem._id}`;
@@ -26,7 +28,7 @@ export const CardItem = ({cardItem}) => {
                     </Link>
                     <CardDate>
                     <CardDateImg src={calendarSvg}></CardDateImg>
-                        <CardDateP>{cardItem.date}</CardDateP>
+                        <CardDateP>{format(cardItem.date, 'P', {locale: ru})}</CardDateP>
                     </CardDate>
                 </DivCardContent>
             </DivCardsCard>

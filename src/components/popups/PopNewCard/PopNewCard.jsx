@@ -7,12 +7,14 @@ import { CategoryLabel } from "../../CategoryLabel/CategoryLabel";
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import './PopNewCard.css'
+import { format } from "date-fns";
+import ru from "date-fns/locale/ru";
 
 export const PopNewCard = ({setIsShown}) => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [category, setCategory] = useState('WEB_DESIGN');	
-	const [date, setDate] = useState(new Date());
+	const [date, setDate] = useState();
 
 	const {addTask} = useContext(DataContext);
 	const closeModal = () => setIsShown(false);
@@ -22,7 +24,7 @@ export const PopNewCard = ({setIsShown}) => {
 		closeModal();
 	}
 
-	const handleCreateNewClick = async () => {		
+	const handleCreateNewClick = () => {		
         const newTask = {
             title: title,
             topic: category,
@@ -31,13 +33,15 @@ export const PopNewCard = ({setIsShown}) => {
             date: date
         };
 
-		try {
-			await addTask(newTask);
-			closeModal();
-		} catch(error) {
-			alert(error)
-		}
+		addTask(newTask)
+		.then(closeModal)
+		.catch(error => alert(error.message));
 	}
+
+	let footer = date 
+		? <p>Срок исполнения <b>{format(date, 'P', {locale: ru})}</b></p>
+		: <p>Выберите срок исполнения</p>;
+	
 
     return (
 		<PopNewCardDiv>
@@ -63,6 +67,7 @@ export const PopNewCard = ({setIsShown}) => {
 									mode="single"
 									selected={date}
 									onSelect={setDate}
+									footer={footer}
 								/>
 							</PopNewCardCalendar>
 						</PopNewCardWrap>

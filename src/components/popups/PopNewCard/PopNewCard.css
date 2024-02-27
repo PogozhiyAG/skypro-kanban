@@ -12,5 +12,7 @@
 
 /*React Day Picker overrides*/
 .rdp {
-    --rdp-cell-size: 24px; /* Size of the day cells. */    
+    --rdp-cell-size: 24px; /* Size of the day cells. */ 
+    --rdp-accent-color: gray;   
+    --rdp-accent-color-dark: darkgray;
 }

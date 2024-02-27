@@ -51,7 +51,11 @@ export function postTask({token, task}) {
             Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(task)
-    }).then(response => {
-        return response.json();
+    }).then(async response => {
+        const j = await response.json();
+        if (response.status === 400) {
+            throw new Error(j.error);
+        }
+        return j;
     });
 }
