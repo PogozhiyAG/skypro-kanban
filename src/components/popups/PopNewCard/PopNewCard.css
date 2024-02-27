@@ -8,3 +8,9 @@
 .category-item_active {
     opacity: 1 !important;
 }
+
+
+/*React Day Picker overrides*/
+.rdp {
+    --rdp-cell-size: 24px; /* Size of the day cells. */    
+}
