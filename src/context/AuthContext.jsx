@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext({});
 
@@ -12,16 +12,15 @@ const getUserFromLocalStorage = () => {
 };
 
 export const AuthContextProvider = ({children}) => { 
-    const [auth, setAuthState] = useState(getUserFromLocalStorage());
+    const [auth, setAuth] = useState(getUserFromLocalStorage());
 
-    const setAuth = value => {
-        setAuthState(value);
-        if (value) {
-            window.localStorage.user = JSON.stringify(value);
+    useEffect(() => {
+        if (auth) {
+            window.localStorage.user = JSON.stringify(auth);
         } else {
             delete window.localStorage.user;
-        }    
-    }
+        }   
+    }, [auth])
 
     const value = {
         auth,

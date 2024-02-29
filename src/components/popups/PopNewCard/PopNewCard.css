@@ -1,0 +1,18 @@
+.category-item {
+    cursor: pointer;
+    opacity: 0.4;
+}
+.category-item:hover {
+    opacity: 0.6;
+}
+.category-item_active {
+    opacity: 1 !important;
+}
+
+
+/*React Day Picker overrides*/
+.rdp {
+    --rdp-cell-size: 24px; /* Size of the day cells. */ 
+    --rdp-accent-color: gray;   
+    --rdp-accent-color-dark: darkgray;
+}

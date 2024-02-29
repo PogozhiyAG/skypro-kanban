@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const cardAnimation = keyframes`
     0% {        
@@ -48,40 +48,6 @@ export const DivCardContent = styled.div`
 
 
 
-
-const CategoryThemes = {
-    _orange: css`
-        background-color: #FFE4C2;
-        color: #FF6D00;
-    `, 
-    _green: css`
-        background-color: #B4FDD1;
-        color: #06B16E;
-    `,
-    _purple: css`
-        background-color: #E9D4FF;
-        color: #9A48F1;
-    `,
-    _gray: css`
-        background: #94A6BE;
-        color: #FFFFFF;
-    `
-};
-
-export const DivCardTheme = styled.div`
-    width: auto;
-    height: 20px;
-    padding: 5px 14px;
-    border-radius: 18px;
-    ${props => CategoryThemes[props.$categoryclass]}
-`;
-
-export const PCardCategory = styled.p`
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 10px;
-    ${props => CategoryThemes[props.$categoryclass]}
-`;
 
 export const CardButtons = styled.div`
     width: 24px;
