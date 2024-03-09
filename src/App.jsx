@@ -15,6 +15,7 @@ import { Layout } from './components/Layout/Layout';
 import { AppRoutes } from './AppRoutes';
 import { AuthContextProvider } from './context/AuthContext';
 import { DataContextProvider } from './context/DataContext';
+import { PopupContextProvider } from './context/PopupContext';
 
 
 function App() {  
@@ -26,24 +27,26 @@ function App() {
   return (
     <AuthContextProvider>
       <DataContextProvider>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle/>
-          <BrowserRouter>
-            <Routes>
-              <Route path={AppRoutes.Home} element={<Layout changeTheme={changeTheme}/>}>
-                <Route element={<PrivateRoute />}>
-                    <Route index element={<Home />}/>
-                    <Route path={AppRoutes.Card} element={<Card/>}/>
-                    <Route path={AppRoutes.Logout} element={<Logout />}/>
-                </Route>
+        <PopupContextProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle/>
+            <BrowserRouter>
+              <Routes>
+                <Route path={AppRoutes.Home} element={<Layout changeTheme={changeTheme}/>}>
+                  <Route element={<PrivateRoute />}>
+                      <Route index element={<Home />}/>
+                      <Route path={AppRoutes.Card} element={<Card/>}/>
+                      <Route path={AppRoutes.Logout} element={<Logout />}/>
+                  </Route>
 
-                <Route path={AppRoutes.Login} element={<Login/>} />
-                <Route path={AppRoutes.Register} element={<Register/>}/>
-                <Route path={"*"} element={<NotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>      
-        </ThemeProvider>
+                  <Route path={AppRoutes.Login} element={<Login/>} />
+                  <Route path={AppRoutes.Register} element={<Register/>}/>
+                  <Route path={"*"} element={<NotFound />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>      
+          </ThemeProvider>
+        </PopupContextProvider>
       </DataContextProvider>
     </AuthContextProvider>
   )

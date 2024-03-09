@@ -5,16 +5,24 @@ import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle
 import { CategoryLabel } from '../CategoryLabel/CategoryLabel.jsx';
 import { format } from "date-fns";
 import ru from "date-fns/locale/ru";
+import { useContext } from 'react';
+import { PopupContext } from '../../context/PopupContext.jsx';
 
 export const CardItem = ({cardItem}) => {
     const cardUrl = `/card/${cardItem._id}`;
+    const {showBrowsePopup} = useContext(PopupContext);
+
+    const handleEditClick = e => {
+        e.preventDefault();
+        showBrowsePopup(cardItem);
+    }
 
     return (
         <DivCardsItem>
             <DivCardsCard>
                 <DivCardGroup>
                     <CategoryLabel code={cardItem.topic}/>
-                    <a href="#popBrowse" target="_self">
+                    <a onClick={handleEditClick}>
                         <CardButtons>
                             <CardButtonDot/>
                             <CardButtonDot/>

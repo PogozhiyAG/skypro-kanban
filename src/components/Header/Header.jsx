@@ -21,23 +21,7 @@ export const Header = ({ changeTheme }) => {
     const navigate = useNavigate();
     const theme = useTheme();
 
-    const handleAddNewTaskClick = () => {
-        // //TODO create from dialog
-        // const getRandomKey = o => {
-        //     const index = Math.floor((Math.random() * 1000) % Object.keys(o).length);
-        //     return Object.keys(o)[index];
-        // }
-
-        // const newTask = {
-        //     title: "New task",
-        //     topic: getRandomKey(TASK_CATEGORY),
-        //     status: getRandomKey(TASK_STATUSES),
-        //     description: "Migrate to React",
-        //     date: "2024-01-09T09:58:45.605Z"
-        // };
-
-        // addTask(newTask);
-
+    const handleAddNewTaskClick = () => {    
         setIsNewCardPopupShown(!isNewCardPopupShown);
     }
 
