@@ -10,14 +10,14 @@ import { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../AppRoutes';
 import { AuthContext } from '../../context/AuthContext';
-// import { DataContext } from '../../context/DataContext';
-// import { TASK_CATEGORY, TASK_STATUSES } from '../../data';
+import { PersistedThemeContext } from '../../context/PersistedThemeContext';
 
-export const Header = ({ changeTheme }) => {
+
+export const Header = () => {
     const {auth} = useContext(AuthContext);
+    const {themeName, setThemeName} = useContext(PersistedThemeContext);
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
-    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);
-    // const {addTask} = useContext(DataContext);
+    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);    
     const navigate = useNavigate();
     const theme = useTheme();
 
@@ -29,7 +29,7 @@ export const Header = ({ changeTheme }) => {
 
     const handleToggleTheme = e => {
         const newTheme = e.target.checked ? 'dark' : 'light';
-        changeTheme(newTheme);
+        setThemeName(newTheme);
     }
 
     const handleLogoutClick = () => {
@@ -59,7 +59,7 @@ export const Header = ({ changeTheme }) => {
                                     <PopUserSetNameP>{getUserDisplayName()}</PopUserSetNameP>                                    
                                     <PopUserSetThemeDiv>
                                         <PopUserSetThemeP>Темная тема</PopUserSetThemeP>
-                                        <CircleCheckBox type="checkbox" onChange={handleToggleTheme}/>
+                                        <CircleCheckBox type="checkbox" checked={themeName === 'dark'} onChange={handleToggleTheme}/>
                                     </PopUserSetThemeDiv>
                                     {auth?.user && (
                                         <HeaderPopUserSetButton>
