@@ -41,6 +41,7 @@ export const StyledButton = styled.button`
     color: ${props => props.$highlight ? props.theme.button.highlightColor : props.theme.button.color};
     border-radius: 4px;
     border: 1px solid ${props => props.$highlight ? props.theme.button.highlightBorder : props.theme.button.border};
+    width: ${props => props.$width ?? 'auto'};
 
     &:hover{
         background-color: #33399b;

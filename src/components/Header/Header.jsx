@@ -1,24 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from 'react';
-import { PopExit } from '../popups/PopExit/PopExit';
 import { PopNewCard } from '../popups/PopNewCard/PopNewCard';
 import './Header.css';
 import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
 import { ContainerDiv } from '../styled/shared';
 import { CircleCheckBox } from '../styled/CircleCheckBox';
 import { useTheme } from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../AppRoutes';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { PersistedThemeContext } from '../../context/PersistedThemeContext';
+import { PopupContext } from '../../context/PopupContext';
 
 
 export const Header = () => {
     const {auth} = useContext(AuthContext);
     const {themeName, setThemeName} = useContext(PersistedThemeContext);
+    const {showLogoutPopup} = useContext(PopupContext);
     const [isUserPopupShown, setIsUserPopupShown] = useState(false);
-    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);    
-    const navigate = useNavigate();
+    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);        
     const theme = useTheme();
 
     const handleAddNewTaskClick = () => {    
@@ -34,7 +33,7 @@ export const Header = () => {
 
     const handleLogoutClick = () => {
         setIsUserPopupShown(false);
-        navigate(AppRoutes.Logout);
+        showLogoutPopup();
     }
 
     const getUserDisplayName = () => auth?.user?.name ?? "Аноним";
@@ -74,8 +73,7 @@ export const Header = () => {
                 </ContainerDiv>			
             </HeaderHeader>
 
-            {isNewCardPopupShown && <PopNewCard setIsShown={setIsNewCardPopupShown}/>}
-            <PopExit/>
+            {isNewCardPopupShown && <PopNewCard setIsShown={setIsNewCardPopupShown}/>}            
         </>
     );
 };
