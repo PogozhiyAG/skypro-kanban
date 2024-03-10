@@ -59,3 +59,19 @@ export function postTask({token, task}) {
         return j;
     });
 }
+
+export function putTask({token, task}) {
+    return fetch(API_TASKS_URL + `/` + task._id, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(task)
+    }).then(async response => {
+        const j = await response.json();
+        if (response.status === 400) {
+            throw new Error(j.error);
+        }
+        return j;
+    });
+}

@@ -8,6 +8,7 @@ import ru from "date-fns/locale/ru";
 import { DayPicker } from "react-day-picker";
 import { StatusLabel } from "../../StatusLabel/StatusLabel";
 import { TASK_STATUSES } from "../../../data";
+import { DataContext } from "../../../context/DataContext";
 
 
 export const PopBrowse = ({item}) => {
@@ -18,6 +19,7 @@ export const PopBrowse = ({item}) => {
 	const [status, setStatus] = useState(item.status);
 	
 	const {closePopup} = useContext(PopupContext);
+	const {editTask} = useContext(DataContext);
 
 	const reset = () => {
 		setDescription(item.description);
@@ -34,6 +36,19 @@ export const PopBrowse = ({item}) => {
 		reset();
 	}
 	
+	const saveTask = () => {
+		const editedTask = {
+			...item,
+            status: status,
+            description: description,
+            date: date
+		};
+
+		editTask(editedTask)
+		.then(closePopup)
+		.catch(error => alert(error.message));
+	}
+
 	const handleCloseClick = () => {		
 		closePopup();
 	}
@@ -85,7 +100,7 @@ export const PopBrowse = ({item}) => {
 						<div className="pop-browse__btn-browse ">
 							<div className="btn-group">
 								{!isEditMode && <button onClick={editMode} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</button>}
-								{isEditMode && <button className="btn-edit__edit _btn-bg _hover01">Сохранить</button>}
+								{isEditMode && <button onClick={saveTask} className="btn-edit__edit _btn-bg _hover01">Сохранить</button>}
 								{isEditMode && <button onClick={browseMode} className="btn-edit__edit _btn-bor _hover03">Отменить</button>}
 								<button className="btn-browse__delete _btn-bor _hover03">Удалить задачу</button>
 							</div>
