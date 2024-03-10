@@ -11,8 +11,7 @@ export const PopupContextProvider = ({children}) => {
 
     const showBrowsePopup = (item) => {
         setBrowseItem(item);
-        setActivePopup("BROWSE");
-        console.log("BROWSE");
+        setActivePopup("BROWSE");        
     }
 
     const closePopup = () => {

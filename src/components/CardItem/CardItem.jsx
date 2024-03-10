@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom';
 import calendarSvg from '../../assets/calendar.svg';
 import { CardButtonDot, CardButtons, CardDate, CardDateImg, CardDateP, CardTitle, DivCardContent, DivCardGroup, DivCardsCard, DivCardsItem } from './CardItem.styled.js';
 import { CategoryLabel } from '../CategoryLabel/CategoryLabel.jsx';
@@ -8,8 +7,7 @@ import ru from "date-fns/locale/ru";
 import { useContext } from 'react';
 import { PopupContext } from '../../context/PopupContext.jsx';
 
-export const CardItem = ({cardItem}) => {
-    const cardUrl = `/card/${cardItem._id}`;
+export const CardItem = ({cardItem}) => {    
     const {showBrowsePopup} = useContext(PopupContext);
 
     const handleEditClick = e => {
@@ -31,9 +29,7 @@ export const CardItem = ({cardItem}) => {
                     </a>
                 </DivCardGroup>
                 <DivCardContent>
-                    <Link to={cardUrl}>
-                        <CardTitle>{cardItem.title}</CardTitle>
-                    </Link>
+                    <CardTitle onClick={handleEditClick}>{cardItem.title}</CardTitle>
                     <CardDate>
                     <CardDateImg src={calendarSvg}></CardDateImg>
                         <CardDateP>{format(cardItem.date, 'P', {locale: ru})}</CardDateP>
