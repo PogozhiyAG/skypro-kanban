@@ -2,6 +2,7 @@
 import { createContext, useState } from "react";
 import { PopBrowse } from "../components/popups/PopBrowse/PopBrowse";
 import { PopExit } from "../components/popups/PopExit/PopExit";
+import { PopNewCard } from "../components/popups/PopNewCard/PopNewCard";
 
 export const PopupContext = createContext({});
 
@@ -19,11 +20,16 @@ export const PopupContextProvider = ({children}) => {
         setActivePopup("LOGOUT");
     }
 
+    const showNewPopup = () => {
+        setActivePopup("NEW");
+    }
+
     const closePopup = () => {
         setActivePopup(null);
     }
     
     const value = {
+        showNewPopup,
         showBrowsePopup,
         showLogoutPopup,
         closePopup
@@ -35,6 +41,7 @@ export const PopupContextProvider = ({children}) => {
                 {children}
                 {activePopup == 'BROWSE' && <PopBrowse item={browseItem}/>}
                 {activePopup == 'LOGOUT' && <PopExit/>}
+                {activePopup == 'NEW'    && <PopNewCard/>}
             </>
         </PopupContext.Provider>
     );

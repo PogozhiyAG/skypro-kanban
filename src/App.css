@@ -23,12 +23,12 @@
 }
 
 
-.pop-exit:target,
+/* .pop-exit:target,
 .pop-new-card:target,
 .pop-browse:target {
   display: block;
 }
-
+ */
 
 
 ._active-category {

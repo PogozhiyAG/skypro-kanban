@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from 'react';
-import { PopNewCard } from '../popups/PopNewCard/PopNewCard';
 import './Header.css';
 import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
 import { ContainerDiv } from '../styled/shared';
@@ -14,14 +13,13 @@ import { PopupContext } from '../../context/PopupContext';
 
 export const Header = () => {
     const {auth} = useContext(AuthContext);
-    const {themeName, setThemeName} = useContext(PersistedThemeContext);
-    const {showLogoutPopup} = useContext(PopupContext);
-    const [isUserPopupShown, setIsUserPopupShown] = useState(false);
-    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);        
+    const {themeName, setThemeName} = useContext(PersistedThemeContext);    
+    const {showLogoutPopup, showNewPopup} = useContext(PopupContext);
+    const [isUserPopupShown, setIsUserPopupShown] = useState(false);    
     const theme = useTheme();
 
     const handleAddNewTaskClick = () => {    
-        setIsNewCardPopupShown(!isNewCardPopupShown);
+        showNewPopup();
     }
 
     const toggleIsUserPopupShown = () => setIsUserPopupShown(shown => !shown);
@@ -72,8 +70,6 @@ export const Header = () => {
                     </HeaderBlockDiv>
                 </ContainerDiv>			
             </HeaderHeader>
-
-            {isNewCardPopupShown && <PopNewCard setIsShown={setIsNewCardPopupShown}/>}            
         </>
     );
 };
