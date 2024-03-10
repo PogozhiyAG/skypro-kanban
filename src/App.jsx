@@ -26,9 +26,9 @@ function App() {
 
   return (
     <AuthContextProvider>
-      <DataContextProvider>
-        <PopupContextProvider>
-          <ThemeProvider theme={theme}>
+      <DataContextProvider>        
+        <ThemeProvider theme={theme}>
+          <PopupContextProvider>
             <GlobalStyle/>
             <BrowserRouter>
               <Routes>
@@ -45,8 +45,8 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>      
-          </ThemeProvider>
-        </PopupContextProvider>
+          </PopupContextProvider>
+        </ThemeProvider>
       </DataContextProvider>
     </AuthContextProvider>
   )

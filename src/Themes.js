@@ -8,6 +8,7 @@ export const themes = {
         primary: '#ffffff',
         secondary: '#EAEEF6',
       },
+      third: '#94A6BE',
       border: '#D4DBE5',
       logo: '../images/logo.png'
     },
@@ -20,6 +21,8 @@ export const themes = {
         primary: '#20202C',
         secondary: '#000000',
       },
+      third: '#94A6BE',
+      active: '#94A6BE',
       border: '#4E5566',
       logo: '../images/logo_dark.png'
     }
