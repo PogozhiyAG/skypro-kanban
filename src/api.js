@@ -75,3 +75,14 @@ export function putTask({token, task}) {
         return j;
     });
 }
+
+export function deleteTask({token, id}) {
+    return fetch(API_TASKS_URL + `/` + id, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {        
+        return response.json();
+    });
+}

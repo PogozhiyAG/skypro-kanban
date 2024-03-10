@@ -19,7 +19,7 @@ export const PopBrowse = ({item}) => {
 	const [status, setStatus] = useState(item.status);
 	
 	const {closePopup} = useContext(PopupContext);
-	const {editTask} = useContext(DataContext);
+	const {editTask, removeTask} = useContext(DataContext);
 
 	const reset = () => {
 		setDescription(item.description);
@@ -45,6 +45,12 @@ export const PopBrowse = ({item}) => {
 		};
 
 		editTask(editedTask)
+		.then(closePopup)
+		.catch(error => alert(error.message));
+	}
+
+	const deleteTask = () => {
+		removeTask(item._id)
 		.then(closePopup)
 		.catch(error => alert(error.message));
 	}
@@ -102,7 +108,7 @@ export const PopBrowse = ({item}) => {
 								{!isEditMode && <button onClick={editMode} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</button>}
 								{isEditMode && <button onClick={saveTask} className="btn-edit__edit _btn-bg _hover01">Сохранить</button>}
 								{isEditMode && <button onClick={browseMode} className="btn-edit__edit _btn-bor _hover03">Отменить</button>}
-								<button className="btn-browse__delete _btn-bor _hover03">Удалить задачу</button>
+								<button onClick={deleteTask} className="btn-browse__delete _btn-bor _hover03">Удалить задачу</button>
 							</div>
 							<button className="btn-browse__close _btn-bg _hover01" onClick={handleCloseClick}>Закрыть</button>
 						</div>						
