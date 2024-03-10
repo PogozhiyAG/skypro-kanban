@@ -8,6 +8,14 @@ export const themes = {
         primary: '#ffffff',
         secondary: '#EAEEF6',
       },
+      button: {
+        border: '#565EEF',
+        color: '#565EEF',        
+        background: 'transparent' ,        
+        highlightBorder: '#565EEF',
+        highlightColor: '#FFFFFF',
+        highlightBackground: '#565EEF'
+      },
       third: '#94A6BE',
       border: '#D4DBE5',
       logo: '../images/logo.png'
@@ -21,8 +29,15 @@ export const themes = {
         primary: '#20202C',
         secondary: '#000000',
       },
-      third: '#94A6BE',
-      active: '#94A6BE',
+      button: {
+        border: '#FFFFFF',
+        color: '#FFFFFF',
+        background: 'transparent' , 
+        highlightBorder: '#565EEF',       
+        highlightColor: '#FFFFFF',
+        highlightBackground: '#565EEF'
+      },
+      third: '#94A6BE',      
       border: '#4E5566',
       logo: '../images/logo_dark.png'
     }

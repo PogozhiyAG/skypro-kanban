@@ -2,13 +2,14 @@
 import { useContext, useState } from "react";
 import { PopupContext } from "../../../context/PopupContext";
 import { CategoryLabel } from "../../CategoryLabel/CategoryLabel";
-import { CalendarTitleP, FormArea, PopBlock, PopCalendar, PopContainer, PopContent, PopDiv, PopForm, PopFormBlock, PopStatus, PopTitle, PopTopBlock, PopWrap, StatusThemes, SubTitleLabel, SubtitleTitleP } from "./PopBrowse.styled";
+import { CalendarTitleP, FormArea, PopBlock, PopBtn, PopBtnGroup, PopCalendar, PopContainer, PopContent, PopDiv, PopForm, PopFormBlock, PopStatus, PopTitle, PopTopBlock, PopWrap, StatusThemes, SubTitleLabel, SubtitleTitleP } from "./PopBrowse.styled";
 import { format } from "date-fns";
 import ru from "date-fns/locale/ru";
 import { DayPicker } from "react-day-picker";
 import { StatusLabel } from "../../StatusLabel/StatusLabel";
 import { TASK_STATUSES } from "../../../data";
 import { DataContext } from "../../../context/DataContext";
+import { StyledButton } from "../../styled/shared";
 
 
 export const PopBrowse = ({item}) => {
@@ -103,15 +104,15 @@ export const PopBrowse = ({item}) => {
 							</PopCalendar>
 						</PopWrap>
 						
-						<div className="pop-browse__btn-browse ">
-							<div className="btn-group">
-								{!isEditMode && <button onClick={editMode} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</button>}
-								{isEditMode && <button onClick={saveTask} className="btn-edit__edit _btn-bg _hover01">Сохранить</button>}
-								{isEditMode && <button onClick={browseMode} className="btn-edit__edit _btn-bor _hover03">Отменить</button>}
-								<button onClick={deleteTask} className="btn-browse__delete _btn-bor _hover03">Удалить задачу</button>
-							</div>
-							<button className="btn-browse__close _btn-bg _hover01" onClick={handleCloseClick}>Закрыть</button>
-						</div>						
+						<PopBtn>
+							<PopBtnGroup>
+								{!isEditMode && <StyledButton onClick={editMode} >Редактировать задачу</StyledButton>}
+								{isEditMode && <StyledButton onClick={saveTask} $highlight>Сохранить</StyledButton>}
+								{isEditMode && <StyledButton onClick={browseMode} >Отменить</StyledButton>}
+								<StyledButton onClick={deleteTask} >Удалить задачу</StyledButton>
+							</PopBtnGroup>
+							<StyledButton onClick={handleCloseClick} $highlight>Закрыть</StyledButton>
+						</PopBtn>						
 												
 					</PopContent>
 				</PopBlock>

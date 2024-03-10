@@ -181,5 +181,21 @@ export const StatusThemes = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: flex-start;    
+`;
+
+
+export const PopBtn = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+export const PopBtnGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 14px
 `;
