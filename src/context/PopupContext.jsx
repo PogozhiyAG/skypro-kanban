@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 import { PopBrowse } from "../components/popups/PopBrowse/PopBrowse";
+import { PopExit } from "../components/popups/PopExit/PopExit";
+import { PopNewCard } from "../components/popups/PopNewCard/PopNewCard";
 
 export const PopupContext = createContext({});
 
@@ -11,8 +13,15 @@ export const PopupContextProvider = ({children}) => {
 
     const showBrowsePopup = (item) => {
         setBrowseItem(item);
-        setActivePopup("BROWSE");
-        console.log("BROWSE");
+        setActivePopup("BROWSE");        
+    }
+
+    const showLogoutPopup = () => {
+        setActivePopup("LOGOUT");
+    }
+
+    const showNewPopup = () => {
+        setActivePopup("NEW");
     }
 
     const closePopup = () => {
@@ -20,7 +29,9 @@ export const PopupContextProvider = ({children}) => {
     }
     
     const value = {
+        showNewPopup,
         showBrowsePopup,
+        showLogoutPopup,
         closePopup
     }
 
@@ -29,6 +40,8 @@ export const PopupContextProvider = ({children}) => {
             <>
                 {children}
                 {activePopup == 'BROWSE' && <PopBrowse item={browseItem}/>}
+                {activePopup == 'LOGOUT' && <PopExit/>}
+                {activePopup == 'NEW'    && <PopNewCard/>}
             </>
         </PopupContext.Provider>
     );

@@ -66,6 +66,7 @@ export const CardButtonDot = styled.div`
 `;
 
 export const CardTitle = styled.h3`
+    cursor: pointer;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;

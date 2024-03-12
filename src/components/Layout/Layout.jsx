@@ -4,10 +4,10 @@ import { Header } from "../Header/Header";
 import { ContainerDiv } from "../styled/shared";
 import { MainBlockDiv, MainContentDiv, MainMain, WrapperDiv } from "./Layout.styled";
 
-export const Layout = ({addNewTask, changeTheme}) => {
+export const Layout = () => {
     return (
         <WrapperDiv>
-            <Header addNewTask={addNewTask} changeTheme={changeTheme}/>
+            <Header />
 
             <MainMain>
                 <ContainerDiv>                    

@@ -1,40 +1,37 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from 'react';
-import { PopExit } from '../popups/PopExit/PopExit';
-import { PopNewCard } from '../popups/PopNewCard/PopNewCard';
 import './Header.css';
 import { HeaderBlockDiv, HeaderHeader, HeaderLogoDiv, HeaderLogoImage, HeaderNav, HeaderNewButton, HeaderPopUserSetA, HeaderPopUserSetButton, HeaderPopUserSetDiv, HeaderUserA, PopUserSetNameP, PopUserSetThemeDiv, PopUserSetThemeP } from './Header.styled';
 import { ContainerDiv } from '../styled/shared';
 import { CircleCheckBox } from '../styled/CircleCheckBox';
 import { useTheme } from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../AppRoutes';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-// import { DataContext } from '../../context/DataContext';
-// import { TASK_CATEGORY, TASK_STATUSES } from '../../data';
+import { PersistedThemeContext } from '../../context/PersistedThemeContext';
+import { PopupContext } from '../../context/PopupContext';
 
-export const Header = ({ changeTheme }) => {
+
+export const Header = () => {
     const {auth} = useContext(AuthContext);
-    const [isUserPopupShown, setIsUserPopupShown] = useState(false);
-    const [isNewCardPopupShown, setIsNewCardPopupShown] = useState(false);
-    // const {addTask} = useContext(DataContext);
-    const navigate = useNavigate();
+    const {themeName, setThemeName} = useContext(PersistedThemeContext);    
+    const {showLogoutPopup, showNewPopup} = useContext(PopupContext);
+    const [isUserPopupShown, setIsUserPopupShown] = useState(false);    
     const theme = useTheme();
 
     const handleAddNewTaskClick = () => {    
-        setIsNewCardPopupShown(!isNewCardPopupShown);
+        showNewPopup();
     }
 
     const toggleIsUserPopupShown = () => setIsUserPopupShown(shown => !shown);
 
     const handleToggleTheme = e => {
         const newTheme = e.target.checked ? 'dark' : 'light';
-        changeTheme(newTheme);
+        setThemeName(newTheme);
     }
 
     const handleLogoutClick = () => {
         setIsUserPopupShown(false);
-        navigate(AppRoutes.Logout);
+        showLogoutPopup();
     }
 
     const getUserDisplayName = () => auth?.user?.name ?? "Аноним";
@@ -59,7 +56,7 @@ export const Header = ({ changeTheme }) => {
                                     <PopUserSetNameP>{getUserDisplayName()}</PopUserSetNameP>                                    
                                     <PopUserSetThemeDiv>
                                         <PopUserSetThemeP>Темная тема</PopUserSetThemeP>
-                                        <CircleCheckBox type="checkbox" onChange={handleToggleTheme}/>
+                                        <CircleCheckBox type="checkbox" checked={themeName === 'dark'} onChange={handleToggleTheme}/>
                                     </PopUserSetThemeDiv>
                                     {auth?.user && (
                                         <HeaderPopUserSetButton>
@@ -73,9 +70,6 @@ export const Header = ({ changeTheme }) => {
                     </HeaderBlockDiv>
                 </ContainerDiv>			
             </HeaderHeader>
-
-            {isNewCardPopupShown && <PopNewCard setIsShown={setIsNewCardPopupShown}/>}
-            <PopExit/>
         </>
     );
 };

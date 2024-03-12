@@ -1,8 +1,4 @@
-import './App.css'
-import { useState } from 'react'
 import { Home } from './components/pages/Home/Home'
-import { ThemeProvider } from 'styled-components';
-import { themes } from './Themes';
 import { GlobalStyle } from './components/styled/GlobalStyle';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
@@ -16,23 +12,19 @@ import { AppRoutes } from './AppRoutes';
 import { AuthContextProvider } from './context/AuthContext';
 import { DataContextProvider } from './context/DataContext';
 import { PopupContextProvider } from './context/PopupContext';
+import { PersistedThemeContextProvider } from './context/PersistedThemeContext';
 
 
-function App() {  
-  const [theme, setTheme] = useState(themes.light);
-
-  const changeTheme = newTheme => setTheme(themes[newTheme]);
-  
-
+function App() {    
   return (
     <AuthContextProvider>
-      <DataContextProvider>
-        <PopupContextProvider>
-          <ThemeProvider theme={theme}>
+      <DataContextProvider>        
+        <PersistedThemeContextProvider>
+          <PopupContextProvider>
             <GlobalStyle/>
             <BrowserRouter>
               <Routes>
-                <Route path={AppRoutes.Home} element={<Layout changeTheme={changeTheme}/>}>
+                <Route path={AppRoutes.Home} element={<Layout />}>
                   <Route element={<PrivateRoute />}>
                       <Route index element={<Home />}/>
                       <Route path={AppRoutes.Card} element={<Card/>}/>
@@ -45,8 +37,8 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>      
-          </ThemeProvider>
-        </PopupContextProvider>
+          </PopupContextProvider>
+        </PersistedThemeContextProvider>
       </DataContextProvider>
     </AuthContextProvider>
   )

@@ -37,12 +37,17 @@ export const HoverEffects = {
 
 export const StyledButton = styled.button`
     padding: .5em 1em;
-    background: transparent;
-    color: ${props => props.theme.fg.primary};
+    background: ${props => props.$highlight ? props.theme.button.highlightBackground : props.theme.button.background};
+    color: ${props => props.$highlight ? props.theme.button.highlightColor : props.theme.button.color};
     border-radius: 4px;
-    border: 1px solid ${props => props.theme.border};
+    border: 1px solid ${props => props.$highlight ? props.theme.button.highlightBorder : props.theme.button.border};
+    width: ${props => props.$width ?? 'auto'};
 
-    ${HoverEffects.hover03}
+    &:hover{
+        background-color: #33399b;
+        color: #FFFFFF;
+        border: 1px solid #33399b
+    }    
 `;
 
 export const StyledInput = styled.input`

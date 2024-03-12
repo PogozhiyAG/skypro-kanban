@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { getTasks, postTask } from "../api";
+import { deleteTask, getTasks, postTask, putTask } from "../api";
 
 export const DataContext = createContext({});
 
@@ -16,6 +16,14 @@ export const DataContextProvider = ({children}) => {
     const addTask = (task) => 
         postTask({token: auth?.user?.token, task})
         .then(data => setTasks(data.tasks));
+
+    const editTask = (task) => 
+        putTask({token: auth?.user?.token, task})
+        .then(data => setTasks(data.tasks));
+
+    const removeTask = (id) => 
+        deleteTask({token: auth?.user?.token, id})
+        .then(data => setTasks(data.tasks));
     
 
     const value = {
@@ -23,7 +31,9 @@ export const DataContextProvider = ({children}) => {
         setTasks,
 
         loadTasks,
-        addTask
+        addTask,
+        editTask,
+        removeTask
     }
 
     return (

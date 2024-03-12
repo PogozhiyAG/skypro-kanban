@@ -1,23 +1,33 @@
+import { useContext } from "react";
+import { StyledButton } from "../../styled/shared";
+import { PopBlock, PopContainer, PopDiv, PopFormGroup, PopTitle } from "./PopExit.styled";
+import { PopupContext } from "../../../context/PopupContext";
+import { AuthContext } from "../../../context/AuthContext";
+
 export const PopExit = () => {
+	const {closePopup} = useContext(PopupContext);
+	const {setAuth} = useContext(AuthContext);	
+
+	const handleCloseClick = () => closePopup();
+
+	const handleLogoutClick = () => {		
+		setAuth(null);
+		closePopup();
+	}
+
     return(
-        <div className="pop-exit" id="popExit">
-			<div className="pop-exit__container">
-				<div className="pop-exit__block">
-					<div className="pop-exit__ttl">
-						<h2>Выйти из аккаунта?</h2>
+        <PopDiv>
+			<PopContainer>
+				<PopBlock>
+					<div>
+						<PopTitle>Выйти из аккаунта?</PopTitle>
 					</div>
-					<form className="pop-exit__form" id="formExit" action="#">
-						<div className="pop-exit__form-group">
-							<button className="pop-exit__exit-yes _hover01" id="exitYes">								
-								<a href="modal/signin.html">Да, выйти</a> 
-							</button>
-							<button className="pop-exit__exit-no _hover03" id="exitNo">
-								<a href="main.html">Нет, остаться</a> 
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+					<PopFormGroup>
+						<StyledButton onClick={handleLogoutClick} $width="153px" $highlight>Да, выйти</StyledButton>
+						<StyledButton onClick={handleCloseClick} $width="153px">Нет, остаться</StyledButton>
+					</PopFormGroup>
+				</PopBlock>
+			</PopContainer>
+		</PopDiv>
     );
 }

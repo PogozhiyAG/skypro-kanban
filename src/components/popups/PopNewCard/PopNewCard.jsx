@@ -9,19 +9,21 @@ import 'react-day-picker/dist/style.css';
 import './PopNewCard.css'
 import { format } from "date-fns";
 import ru from "date-fns/locale/ru";
+import { PopupContext } from "../../../context/PopupContext";
 
-export const PopNewCard = ({setIsShown}) => {
+export const PopNewCard = () => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [category, setCategory] = useState('WEB_DESIGN');	
 	const [date, setDate] = useState();
 
 	const {addTask} = useContext(DataContext);
-	const closeModal = () => setIsShown(false);
+	const {closePopup} = useContext(PopupContext);
 
-	const handleCloseClick = e => {
-		e.preventDefault();
-		closeModal();
+	
+	const handleCloseClick = () => {	
+		console.log("AAA");	
+		closePopup();
 	}
 
 	const handleCreateNewClick = () => {		
@@ -34,7 +36,7 @@ export const PopNewCard = ({setIsShown}) => {
         };
 
 		addTask(newTask)
-		.then(closeModal)
+		.then(closePopup())
 		.catch(error => alert(error.message));
 	}
 
@@ -49,7 +51,7 @@ export const PopNewCard = ({setIsShown}) => {
 				<PopNewCardBlock>
 					<PopNewCardContent>
 						<PopNewCardTitle>Создание задачи</PopNewCardTitle>
-						<PopNewCardClose href="#" onClick={handleCloseClick}>&#10006;</PopNewCardClose>
+						<PopNewCardClose  onClick={handleCloseClick}>&#10006;</PopNewCardClose>
 						<PopNewCardWrap>
 							<PopNewCardForm id="formNewCard" action="#">
 								<FormNewBlock>
