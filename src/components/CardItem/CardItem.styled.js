@@ -1,19 +1,7 @@
-import styled, { keyframes } from "styled-components";
-
-const cardAnimation = keyframes`
-    0% {        
-        opacity: 0;
-    }
-    100% {        
-        opacity: 1;
-    }
-`;
+import styled from "styled-components";
 
 export const DivCardsItem = styled.div`
     padding: 5px;
-    animation-name: ${cardAnimation};
-    animation-duration: 500ms;
-    animation-timing-function: linear;
 `;
 
 export const DivCardsCard = styled.div`
