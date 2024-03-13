@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainColumnDiv = styled.div`
     width: 20%;
     margin: 0 auto;
-    display: block;
+    display: block;    
     @media screen and (max-width: 1200px) {
         width: 100%;
         margin: 0 auto;
@@ -31,6 +31,9 @@ export const CardsDiv = styled.div`
     width: 100%;
     display: block;
     position: relative;
+    min-height: 300px;
+    padding-bottom: 300px;
+    
     @media screen and (max-width: 1200px) {
         width: 100%;
         display: flex;
